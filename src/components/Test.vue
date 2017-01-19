@@ -12,13 +12,13 @@
         <div class="left-info">
           <span class="One-line-movie-title">{{movie.Title}}</span>
           <p>
-            <span class="desc">{{movie.Plot}}</span>
+            <span class="desc">{{movie.id}}</span>
           </p>
           <div class="star-ratings-sprite">
             <span :style="{width: movie.imdbRating*10+'%'}" class="star-ratings-sprite-rating"></span>
           </div>
         </div>
-        <div class="right-info" :style="{backgroundImage: 'url(' + movie.Poster + ')'}">
+        <div class="right-info" :style="{backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + movie.backdrop_path + ')'}">
         </div>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -30,20 +30,12 @@
 
 <script>
   const axios = require('axios');
-  const movieList = [
-    ['ROGUE ONE: A STAR WARS STORY','https://www.rottentomatoes.com/m/rogue_one_a_star_wars_story/'],
-    ['Sing','https://www.rottentomatoes.com/m/sing_2016'],
-    ['passengers','https://www.rottentomatoes.com/m/passengers_2016'],
-    ['MOANA','https://www.rottentomatoes.com/m/moana_2016'],
-    ['FANTASTIC BEASTS AND WHERE TO FIND THEM', 'https://www.rottentomatoes.com/m/fantastic_beasts_and_where_to_find_them']
-  ]
   export default {
     name: 'movie',
     data(){
       return{
         title: "In Theaters",
         subTitle: "Top Movies This Week",
-        movieList,
         movies:[],
         swiperOption: {
           autoplay: 0,
@@ -54,36 +46,35 @@
           observeParents:true,
           initialSlide :0,
           keyboardControl : true,
-          loop : false,
+          loop : true,
           onInit(swiper){
             const index = swiper.activeIndex;
-            changeLink(index)
+            // changeLink(index)
           },
           onSlideChangeEnd(swiper){
             const index = swiper.activeIndex;
-            changeLink(index)
+            // changeLink(index)
           },
         },
       }
     },
     created: function(){
-        var self= this;
-        for(var i=0;i<this.movieList.length;i++){
-          var movie = self.movieList[i][0];
-          axios.get('http://www.omdbapi.com/?t='+movie+'&y=&plot=short&r=json')
+        var self=this;
+          axios.get('https://api.themoviedb.org/3/movie/upcoming?api_key=f7c5bb6cab4de28f80a47e606646dd5c&language=en-US&page=1')
             .then(function(response){
-              self.movies.push(response.data)
+              Array.prototype.push.apply(self.movies, response.data.results);
+              console.log(response.data.results)
+              self.movies.sort()
             })
             .catch(function(error){
               console.log(error);
             });
-        }
     }
   }
-  function changeLink(index){
-    const linkViewMore = document.getElementById('view-more-link');
-    linkViewMore.href = movieList[index][1];
-  }
+  // function changeLink(index){
+  //   const linkViewMore = document.getElementById('view-more-link');
+  //   // linkViewMore.href = movieList[index][1];
+  // }
 </script>
 
 
