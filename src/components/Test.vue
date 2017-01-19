@@ -35,7 +35,7 @@
     ['Sing','https://www.rottentomatoes.com/m/sing_2016'],
     ['passengers','https://www.rottentomatoes.com/m/passengers_2016'],
     ['MOANA','https://www.rottentomatoes.com/m/moana_2016'],
-    ['FANTASTIC BEASTS AND WHERE TO FIND THEM','https://www.rottentomatoes.com/m/fantastic_beasts_and_where_to_find_them']
+    ['FANTASTIC BEASTS AND WHERE TO FIND THEM', 'https://www.rottentomatoes.com/m/fantastic_beasts_and_where_to_find_them']
   ]
   export default {
     name: 'movie',
@@ -208,7 +208,7 @@
   .swiper-container{
     padding-bottom: 30px;
   }
-  
+
 
   @media only screen and (max-width: 568px){
     .swiper-slide{
