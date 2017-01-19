@@ -1,0 +1,10 @@
+{
+ "name": "movie",
+ "version": "1.0.0",
+ "description": "movie",
+ "author": "Aleksa Matiyev",
+ "private": true,
+ "scripts": {
+   "postinstall": "npm install express"
+ }
+}
