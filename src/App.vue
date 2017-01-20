@@ -23,11 +23,11 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
   position: relative;
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
   width:92%;
-  top: 50%;
-  transform: translateY(50%);
+  top: 20%;
+  transform: translateY(20%);
   border: 1px solid #E8E9EB;
   padding: 1.5%;
 }
