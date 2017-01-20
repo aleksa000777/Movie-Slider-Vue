@@ -1,15 +1,16 @@
 <template>
   <div class="movie">
     <div class="header">
+      <button v-on:click="say($event)">Watch Trailer</button>
+
       <h1 class="In-Theaters">{{title}}</h1>
       <h2 class="Top-Movies-This-Week">{{subTitle}}</h2>
     </div>
     <div class="view-more">
-      <!-- <a id="view-more-link" href="" target="_blank">View More</a> -->
     </div>
     <swiper :options="swiperOption">
       <swiper-slide v-for="movie in movies">
-        <div class="left-info">
+        <div class="left-info" v-bind:id="movie.id">
           <span class="One-line-movie-title">{{movie.title}} | {{movie.release_date}}</span>
           <p>
             <span class="desc">{{movie.overview}}</span>
@@ -47,13 +48,14 @@
           initialSlide :0,
           keyboardControl : true,
           loop : true,
+          preventClicks : false,
           onInit(swiper){
             const index = swiper.activeIndex;
-            // changeLink(index)
+            // this.changeLink(index)
           },
           onSlideChangeEnd(swiper){
             const index = swiper.activeIndex;
-            // changeLink(index)
+            // this.changeLink(index)
           },
         },
       }
@@ -69,12 +71,25 @@
             .catch(function(error){
               console.log(error);
             });
-    }
+    },
+    methods: {
+      say: function (event) {
+        event.preventDefault();
+        const ID = document.getElementsByClassName('swiper-slide-active')["0"].firstChild.id;
+        axios.get('https://api.themoviedb.org/3/movie/'+ID+'/videos?api_key=f7c5bb6cab4de28f80a47e606646dd5c&language=en-US')
+          .then(function(response){
+            window.location.href = "https://www.youtube.com/watch?v="+response.data.results[0].key
+          })
+          .catch(function(error){
+            console.log(error);
+          });
+      }
+
   }
-  // function changeLink(index){
-  //   const linkViewMore = document.getElementById('view-more-link');
-  //   // linkViewMore.href = movieList[index][1];
-  // }
+  // https://www.youtube.com/watch?v=XXX ('key' from https://api.themoviedb.org/3/movie/277834/videos?api_key=XXX&language=en-US)
+
+
+  }
 </script>
 
 
