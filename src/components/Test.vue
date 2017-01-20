@@ -5,20 +5,20 @@
       <h2 class="Top-Movies-This-Week">{{subTitle}}</h2>
     </div>
     <div class="view-more">
-      <a id="view-more-link" href="" target="_blank">View More</a>
+      <!-- <a id="view-more-link" href="" target="_blank">View More</a> -->
     </div>
     <swiper :options="swiperOption">
       <swiper-slide v-for="movie in movies">
         <div class="left-info">
-          <span class="One-line-movie-title">{{movie.Title}}</span>
+          <span class="One-line-movie-title">{{movie.title}} | {{movie.release_date}}</span>
           <p>
-            <span class="desc">{{movie.id}}</span>
+            <span class="desc">{{movie.overview}}</span>
           </p>
           <div class="star-ratings-sprite">
-            <span :style="{width: movie.imdbRating*10+'%'}" class="star-ratings-sprite-rating"></span>
+            <span :style="{width: movie.vote_average*10+'%'}" class="star-ratings-sprite-rating"></span>
           </div>
         </div>
-        <div class="right-info" :style="{backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + movie.backdrop_path + ')'}">
+        <div class="right-info" :style="{backgroundImage: 'url(https://image.tmdb.org/t/p/w500/' + movie.poster_path + ')'}">
         </div>
       </swiper-slide>
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -35,7 +35,7 @@
     data(){
       return{
         title: "In Theaters",
-        subTitle: "Top Movies This Week",
+        subTitle: "Upcoming Movies",
         movies:[],
         swiperOption: {
           autoplay: 0,
