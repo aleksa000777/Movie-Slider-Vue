@@ -1,7 +1,7 @@
 <template>
   <div class="movie">
     <div class="header">
-      <button v-on:click="say($event)">Watch Trailer</button>
+      <img v-on:click="watch($event)" src="../assets/youtube_logo.png" class="trailer-btn"/>
 
       <h1 class="In-Theaters">{{title}}</h1>
       <h2 class="Top-Movies-This-Week">{{subTitle}}</h2>
@@ -49,14 +49,6 @@
           keyboardControl : true,
           loop : true,
           preventClicks : false,
-          onInit(swiper){
-            const index = swiper.activeIndex;
-            // this.changeLink(index)
-          },
-          onSlideChangeEnd(swiper){
-            const index = swiper.activeIndex;
-            // this.changeLink(index)
-          },
         },
       }
     },
@@ -65,7 +57,6 @@
           axios.get('https://api.themoviedb.org/3/movie/upcoming?api_key=f7c5bb6cab4de28f80a47e606646dd5c&language=en-US&page=1')
             .then(function(response){
               Array.prototype.push.apply(self.movies, response.data.results);
-              console.log(response.data.results)
               self.movies.sort()
             })
             .catch(function(error){
@@ -73,7 +64,7 @@
             });
     },
     methods: {
-      say: function (event) {
+      watch: function (event) {
         event.preventDefault();
         const ID = document.getElementsByClassName('swiper-slide-active')["0"].firstChild.id;
         axios.get('https://api.themoviedb.org/3/movie/'+ID+'/videos?api_key=f7c5bb6cab4de28f80a47e606646dd5c&language=en-US')
@@ -86,7 +77,6 @@
       }
 
   }
-  // https://www.youtube.com/watch?v=XXX ('key' from https://api.themoviedb.org/3/movie/277834/videos?api_key=XXX&language=en-US)
 
 
   }
@@ -95,6 +85,10 @@
 
 
 <style scoped>
+  .trailer-btn {
+    width: 100px;
+  }
+
   .In-Theaters {
     font-family: Roboto;
     font-size: 24px;
@@ -103,6 +97,7 @@
     font-stretch: normal;
     color: #3b3f47;
     text-align: left;
+    margin: 0;
   }
   .Top-Movies-This-Week {
     font-family: Roboto;
@@ -187,7 +182,7 @@
     display: flex;
   }
   .star-ratings-sprite {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background: url("../assets/star-rating-sprite.png") repeat-x;
     font-size: 0;
     height: 21px;
     line-height: 0;
@@ -198,7 +193,7 @@
     margin-left: 1%;
   }
   .star-ratings-sprite-rating {
-    background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/2605/star-rating-sprite.png") repeat-x;
+    background: url("../assets/star-rating-sprite.png") repeat-x;
     background-position: 0 100%;
     float: left;
     height: 21px;
@@ -241,6 +236,7 @@
 
     .swiper-container-horizontal > .swiper-pagination-bullets {
       bottom: 5px;
+      display: none;
     }
     .swiper-pagination-bullet{
       border: #666 solid 1.9px;
@@ -251,6 +247,7 @@
     }
     .In-Theaters{
       margin-bottom: 1%;
+      text-align: center;
     }
     .swiper-container{
       padding-bottom: 10px;
