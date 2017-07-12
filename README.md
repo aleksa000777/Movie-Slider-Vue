@@ -2,6 +2,8 @@ https://calm-mesa-69870.herokuapp.com/
 
 # myapp
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/aleksa000777/Movie-Slider-Vue.svg)](https://greenkeeper.io/)
+
 > A Vue.js project
 
 ## Build Setup
