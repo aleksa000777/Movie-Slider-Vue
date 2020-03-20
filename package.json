@@ -12,7 +12,7 @@
     "axios": "^0.16.2",
     "rotten-tomatoes": "^0.1.0",
     "vue": "^2.4.1",
-    "vue-awesome-swiper": "^2.2.9",
+    "vue-awesome-swiper": "^4.0.1",
     "vue-product-carousel": "^0.2.0",
     "vue-resource": "^1.0.3",
     "vue-swipe": "^2.0.0",
